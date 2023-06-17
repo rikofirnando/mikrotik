@@ -1,0 +1,11 @@
+/ip firewall filter
+add chain=input connection-state=new protocol=tcp dst-port=2022,8081 action=jump jump-target=brute_force
+
+/ip firewall filter
+add chain=brute_force protocol=tcp dst-port=2022,8081 connection-state=new src-address-list=ssh_web_blacklist action=drop
+
+/ip firewall filter
+add chain=brute_force protocol=tcp dst-port=2022,8081 connection-state=new action=add-src-to-address-list address-list=ssh_blacklist address-list-timeout=1m
+
+/ip firewall filter
+add chain=brute_force protocol=tcp dst-port=2022,8081 connection-state=new action=accept
