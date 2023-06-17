@@ -1,0 +1,1 @@
+:for x from 20 to 254 do={/queue simple add name=("NUN-Client-" . $x) max-limit=60M/60M burst-limit=70M/70M burst-threshold=3M/3M burst-time=16/16 limit-at=50M/50M priority=8/8 queue=pcq-upload-default/pcq-download-default parent=TOTAL_SPEED target=("192.168.10." . $x)}
